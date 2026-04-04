@@ -8,14 +8,21 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/pointing.h>
 
-#define MOUSE 1
-#define MARK 2
-#define CURSOR 3
-#define FUNCTION 4
-#define SCROLL 5
-#define WIRELESS 6
+// Layer definitions
+// 0: DEFAULT  - 基本英字入力（ホームロウ Mod-Tap）
+// 1: NAV      - カーソル移動・テンキー
+// 2: SYM      - 記号・数字・マウス操作
+// 3: NUM      - ファンクションキー
+// 4: SCROLL   - トラックボールスクロールモード
+// 5: WIRELESS - Bluetooth設定
 
-//mouse cursol
+#define NAV      1
+#define SYM      2
+#define NUM      3
+#define SCROLL   4
+#define WIRELESS 5
+
+// マウスカーソル設定
 
 &mmv {
     delay-ms = <20>;
@@ -24,7 +31,7 @@
     acceleration-exponent = <2>;
 };
 
-//mouse scroll
+// マウススクロール設定
 
 &msc {
     delay-ms = <3>;
@@ -45,19 +52,22 @@
     };
 };
 
+// NUM レイヤー有効時にスクロールを3倍速にする
+
 &msc_input_listener {
     speed_up {
-        layers = <FUNCTION>;
-        input-processors = <&zip_wheel_scaler 3 1>; //スクロールを3倍速にする
+        layers = <NUM>;
+        input-processors = <&zip_wheel_scaler 3 1>;
     };
 };
+
+// SCROLL レイヤー有効時にトラックボールをスクロールとして使用
 
 &trackball_listener {
     scroller {
         layers = <SCROLL>;
         input-processors =
             <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
-            //スクロール方向を逆転,
             <&zip_xy_to_scroll_mapper>;
     };
 };
@@ -66,35 +76,49 @@
     combos {
         compatible = "zmk,combos";
 
+        // 全角/半角 (左上 E+I)
+
         ZenkakuHankaku {
             bindings = <&kp GRAVE>;
             key-positions = <11 12>;
         };
+
+        // Delete (右上 R+Y)
 
         DeleteKey {
             bindings = <&kp DEL>;
             key-positions = <7 8>;
         };
 
+        // Insert (右上 W+R)
+
         InsertKey {
             bindings = <&kp INS>;
             key-positions = <6 7>;
         };
+
+        // 中クリック
 
         CenterClick {
             bindings = <&mkp MB3>;
             key-positions = <17 16>;
         };
 
+        // 右クリック
+
         RightClick {
             bindings = <&mkp MB2>;
             key-positions = <18 17>;
         };
 
+        // 戻る (MB4)
+
         PrevClick {
             bindings = <&mkp MB4>;
             key-positions = <27 28>;
         };
+
+        // 進む (MB5)
 
         ClickNext {
             bindings = <&mkp MB5>;
@@ -121,67 +145,50 @@
     keymap {
         compatible = "zmk,keymap";
 
+        // ────────────────────────────────────────────────
+        // Layer 0: DEFAULT
+        // 左手ホームロウ: E=Shift, I=Alt, A=Ctrl, 0=Win
+        // 右手ホームロウ: T=Win, N=Ctrl, S=Alt, H=Shift
+        // ────────────────────────────────────────────────
+
         default_layer {
             bindings = <
-&kp Q          &kp L         &kp U               &kp COMMA  &kp PERIOD                             &kp F      &kp W  &kp R                &kp Y          &kp P
-&kp E          &kp I         &kp A               &kp O      &kp MINUS                              &kp K      &kp T  &kp N                &kp S          &kp H
-&kp Z          &kp X         &kp C               &kp V      &kp SEMICOLON                          &kp G      &kp M  &kp J                &kp M          &kp B
-&mt LCTRL ESC  &kp LEFT_WIN  &mt LEFT_ALT GRAVE  &kp A      &lt 4 ENTER    &mo 2    &kp BACKSPACE  &kp ENTER         &lt 5 RIGHT_BRACKET  &kp BACKSLASH  &mt RIGHT_SHIFT SLASH
+&kp Q         &kp L         &kp U        &kp COMMA    &kp PERIOD                         &kp F          &kp W       &kp R        &kp Y          &kp P
+&mt LSHIFT E  &mt LALT I    &mt LCTRL A  &mt LGUI N0  &kp DQT                            &kp K          &mt RGUI T  &mt RCTRL N  &mt RALT S     &mt RSHIFT H
+&kp Z         &kp X         &kp C        &kp V        &kp SEMICOLON                      &kp G          &kp D       &kp M        &kp J          &kp B
+&kp LALT      &kp LEFT_WIN  &lt 0 TAB    &lt 1 SPACE  &lt 0 ENTER    &mo 1    &kp ENTER  &kp BACKSPACE              &mo 0        &kp BACKSLASH  &mt RSHIFT SLASH
             >;
 
             sensor-bindings = <&mouse_scrl SCRL_DOWN SCRL_UP>;
         };
 
-        //1
+        // ────────────────────────────────────────────────
+        // Layer 1: NAV - カーソル移動・テンキー
+        // ────────────────────────────────────────────────
+        // ────────────────────────────────────────────────
+        // Layer 2: SYM - 記号・数字・マウスボタン
+        // ────────────────────────────────────────────────
 
-        MOUSE {
+        SYM {
             bindings = <
-&trans  &trans  &trans  &trans  &trans                    &trans  &trans    &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans                    &trans  &mkp MB1  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans                    &trans  &trans    &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans            &trans  &trans  &trans
-            >;
-        };
-
-        //2
-
-        MARK {
-            bindings = <
-&kp EXCLAMATION             &kp AT           &kp HASH         &kp DOLLAR     &kp PERCENT                      &kp CARET     &kp AMPERSAND  &kp ASTERISK           &kp LEFT_PARENTHESIS  &kp LBKT
-&kp SLASH                   &kp KP_NUMBER_4  &kp KP_NUMBER_5  &kp SEMICOLON  &kp SEMICOLON                    &kp C_MUTE    &kp LS(LBKT)   &kp RIGHT_BRACKET      &kp BACKSLASH         &kp EQUAL
-&mt LEFT_SHIFT KP_NUMBER_0  &kp KP_NUMBER_1  &kp KP_NUMBER_2  &kp APOS       &kp SQT                          &kp KP_EQUAL  &kp INT3       &kp LS(RIGHT_BRACKET)  &kp LS(BACKSLASH)     &kp LS(INT1)
-&trans                      &trans           &trans           &trans         &trans         &trans    &trans  &trans                       &kp ASTERISK           &kp LEFT_PARENTHESIS  &kp LS(QUESTION)
+&kp NUMBER_7  &kp NUMBER_8  &kp NUMBER_9  &kp NUMBER_0      &kp SLASH                            &trans    &trans    &mkp MB3  &trans     &trans
+&kp NUMBER_4  &kp NUMBER_5  &kp NUMBER_6  &kp EQUAL         &kp MINUS                            &mkp MB4  &mkp MB1  &kp UP    &mkp MB2   &mkp MB5
+&kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp LEFT_BRACKET  &kp RIGHT_BRACKET                    &trans    &kp LEFT  &kp DOWN  &kp RIGHT  &trans
+&to 0         &trans        &trans        &trans            &trans             &trans    &trans  &trans              &trans    &trans     &trans
             >;
 
             sensor-bindings = <&re_kp C_VOLUME_DOWN C_VOLUME_UP>;
         };
 
-        //3
-
-        CURSOR {
-            bindings = <
-&trans    &kp LC(LG(LEFT_ARROW))  &kp UP_ARROW  &kp LC(LG(RIGHT_ARROW))  &trans                       &kp KP_MULTIPLY  &kp NUMBER_7  &kp NUMBER_8  &kp NUMBER_9  &kp KP_PLUS
-&trans    &kp LEFT_ARROW          &kp DOWN      &kp RIGHT_ARROW          &trans                       &kp KP_SLASH     &kp NUMBER_4  &kp NUMBER_5  &kp NUMBER_6  &kp KP_MINUS
-&kp HOME  &kp PAGE_DOWN           &kp END       &kp PAGE_UP              &trans                       &kp UNDER        &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp ENTER
-&trans    &trans                  &trans        &trans                   &trans  &trans    &kp ENTER  &kp NUMBER_0                   &kp DOT       &kp ENTER     &kp QUESTION
-            >;
-        };
-
-        //4
-        //5
-
-        SCROLL {
-            bindings = <
-&trans    &kp LC(LG(LEFT_ARROW))  &kp UP_ARROW  &kp LC(LG(RIGHT_ARROW))  &trans                    &kp KP_MULTIPLY  &kp NUMBER_7  &kp NUMBER_8  &kp NUMBER_9  &kp KP_PLUS
-&trans    &kp LEFT_ARROW          &kp DOWN      &kp RIGHT_ARROW          &trans                    &kp KP_SLASH     &kp NUMBER_4  &kp NUMBER_5  &kp NUMBER_6  &kp KP_MINUS
-&kp HOME  &kp PAGE_DOWN           &kp END       &kp PAGE_UP              &trans                    &kp UNDER        &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp ENTER
-&trans    &trans                  &trans        &trans                   &trans  &trans    &trans  &kp NUMBER_0                   &kp NUMBER_0  &kp DOT       &kp QUESTION
-            >;
-
-            sensor-bindings = <&inc_dec_kp DOWN_ARROW UP_ARROW>;
-        };
-
-        //6
+        // ────────────────────────────────────────────────
+        // Layer 3: NUM - ファンクションキー
+        // ────────────────────────────────────────────────
+        // ────────────────────────────────────────────────
+        // Layer 4: SCROLL - トラックボールスクロール
+        // ────────────────────────────────────────────────
+        // ────────────────────────────────────────────────
+        // Layer 5: WIRELESS - Bluetooth設定
+        // ────────────────────────────────────────────────
 
         WIRELESS {
             bindings = <
