@@ -23,6 +23,7 @@
 #define WIRELESS 5
 
 // マウスカーソル設定
+
 &mmv {
     delay-ms = <20>;
     trigger-period-ms = <5>;
@@ -31,6 +32,7 @@
 };
 
 // マウススクロール設定
+
 &msc {
     delay-ms = <3>;
     trigger-period-ms = <3>;
@@ -51,6 +53,7 @@
 };
 
 // NUM レイヤー有効時にスクロールを3倍速にする
+
 &msc_input_listener {
     speed_up {
         layers = <NUM>;
@@ -59,6 +62,7 @@
 };
 
 // SCROLL レイヤー有効時にトラックボールをスクロールとして使用
+
 &trackball_listener {
     scroller {
         layers = <SCROLL>;
@@ -73,42 +77,49 @@
         compatible = "zmk,combos";
 
         // 全角/半角 (左上 E+I)
+
         ZenkakuHankaku {
             bindings = <&kp GRAVE>;
             key-positions = <11 12>;
         };
 
         // Delete (右上 R+Y)
+
         DeleteKey {
             bindings = <&kp DEL>;
             key-positions = <7 8>;
         };
 
         // Insert (右上 W+R)
+
         InsertKey {
             bindings = <&kp INS>;
             key-positions = <6 7>;
         };
 
         // 中クリック
+
         CenterClick {
             bindings = <&mkp MB3>;
             key-positions = <17 16>;
         };
 
         // 右クリック
+
         RightClick {
             bindings = <&mkp MB2>;
             key-positions = <18 17>;
         };
 
         // 戻る (MB4)
+
         PrevClick {
             bindings = <&mkp MB4>;
             key-positions = <27 28>;
         };
 
         // 進む (MB5)
+
         ClickNext {
             bindings = <&mkp MB5>;
             key-positions = <26 27>;
@@ -126,6 +137,7 @@
             compatible = "zmk,behavior-sensor-rotate-var";
             #sensor-binding-cells = <2>;
             bindings = <&msc>, <&msc>;
+
             tap-ms = <20>;
         };
     };
@@ -138,12 +150,13 @@
         // 左手ホームロウ: E=Shift, I=Alt, A=Ctrl, 0=Win
         // 右手ホームロウ: T=Win, N=Ctrl, S=Alt, H=Shift
         // ────────────────────────────────────────────────
+
         default_layer {
             bindings = <
-&kp Q         &kp L         &kp U         &kp COMMA     &kp PERIOD                                                     &kp F    &kp W         &kp R         &kp Y         &kp P
-&mt LSHIFT E  &mt LALT I    &mt LCTRL A   &mt LGUI N0   &kp DQT                                                        &kp K    &mt RGUI T    &mt RCTRL N   &mt RALT S    &mt RSHIFT H
-&kp Z         &kp X         &kp C         &kp V         &kp SEMICOLON                                                  &kp G    &kp D         &kp M         &kp J         &kp B
-&kp LALT      &kp LEFT_WIN  &lt NAV TAB   &lt SYM SPACE &lt NUM ENTER  &mo SYM    &kp ENTER  &kp BACKSPACE  &mo SCROLL  &kp BACKSLASH  &mt RSHIFT SLASH
+&kp Q         &kp L         &kp U        &kp COMMA    &kp PERIOD                         &kp F          &kp W       &kp R        &kp Y          &kp P
+&mt LSHIFT E  &mt LALT I    &mt LCTRL A  &mt LGUI N0  &kp DQT                            &kp K          &mt RGUI T  &mt RCTRL N  &mt RALT S     &mt RSHIFT H
+&kp Z         &kp X         &kp C        &kp V        &kp SEMICOLON                      &kp G          &kp D       &kp M        &kp J          &kp B
+&kp LALT      &kp LEFT_WIN  &lt 0 TAB    &lt 1 SPACE  &lt 0 ENTER    &mo 1    &kp ENTER  &kp BACKSPACE              &mo 0        &kp BACKSLASH  &mt RSHIFT SLASH
             >;
 
             sensor-bindings = <&mouse_scrl SCRL_DOWN SCRL_UP>;
@@ -152,24 +165,16 @@
         // ────────────────────────────────────────────────
         // Layer 1: NAV - カーソル移動・テンキー
         // ────────────────────────────────────────────────
-        NAV {
-            bindings = <
-&trans    &kp LC(LG(LEFT_ARROW))  &kp UP_ARROW  &kp LC(LG(RIGHT_ARROW))  &trans                                           &kp KP_MULTIPLY  &kp N7  &kp N8  &kp N9  &kp KP_PLUS
-&trans    &kp LEFT_ARROW          &kp DOWN       &kp RIGHT_ARROW          &trans                                           &kp KP_SLASH     &kp N4  &kp N5  &kp N6  &kp KP_MINUS
-&kp HOME  &kp PAGE_DOWN           &kp END        &kp PAGE_UP              &trans                                           &kp UNDER        &kp N1  &kp N2  &kp N3  &kp ENTER
-&trans    &trans                  &trans         &trans                   &trans   &trans    &kp ENTER  &kp N0  &kp DOT  &kp ENTER  &kp QUESTION
-            >;
-        };
-
         // ────────────────────────────────────────────────
         // Layer 2: SYM - 記号・数字・マウスボタン
         // ────────────────────────────────────────────────
+
         SYM {
             bindings = <
-&kp ESC   &kp LBRC    &kp RBRC    &kp LBKT    &kp RBKT                                                  &mkp MB4  &mkp MB5  &kp UP_ARROW  &trans      &trans
-&kp N1    &kp N2      &kp N3      &kp N4      &kp N5                                                    &mkp MB1  &mkp MB2  &mkp MB3      &kp LEFT    &kp RIGHT
-&kp N6    &kp N7      &kp N8      &kp N9      &kp N0                                                    &trans    &trans    &trans        &kp DOWN    &trans
-&to 0     &trans      &trans      &trans      &trans    &trans    &trans    &trans    &trans    &trans    &trans
+&kp ESC  &kp LBRC  &kp RBRC  &kp LBKT  &kp RBKT                    &mkp MB4  &mkp MB5  &kp UP_ARROW  &trans    &trans
+&kp N1   &kp N2    &kp N3    &kp N4    &kp N5                      &mkp MB1  &mkp MB2  &mkp MB3      &kp LEFT  &kp RIGHT
+&kp N6   &kp N7    &kp N8    &kp N9    &kp N0                      &trans    &trans    &trans        &kp DOWN  &trans
+&to 0    &trans    &trans    &trans    &trans    &trans    &trans  &trans              &trans        &trans    &trans
             >;
 
             sensor-bindings = <&re_kp C_VOLUME_DOWN C_VOLUME_UP>;
@@ -178,38 +183,19 @@
         // ────────────────────────────────────────────────
         // Layer 3: NUM - ファンクションキー
         // ────────────────────────────────────────────────
-        NUM {
-            bindings = <
-&kp F1   &kp F2   &kp F3   &kp F4   &kp F5                                               &kp F6   &kp F7   &kp F8   &kp F9   &kp F10
-&kp F11  &kp F12  &trans   &trans   &trans                                               &trans   &trans   &trans   &trans   &trans
-&trans   &trans   &trans   &trans   &trans                                               &trans   &trans   &trans   &trans   &trans
-&trans   &trans   &trans   &trans   &trans   &trans    &trans    &trans   &trans   &trans   &trans
-            >;
-        };
-
         // ────────────────────────────────────────────────
         // Layer 4: SCROLL - トラックボールスクロール
         // ────────────────────────────────────────────────
-        SCROLL {
-            bindings = <
-&trans    &kp LC(LG(LEFT_ARROW))  &kp UP_ARROW  &kp LC(LG(RIGHT_ARROW))  &trans                                           &kp KP_MULTIPLY  &kp N7  &kp N8  &kp N9  &kp KP_PLUS
-&trans    &kp LEFT_ARROW          &kp DOWN       &kp RIGHT_ARROW          &trans                                           &kp KP_SLASH     &kp N4  &kp N5  &kp N6  &kp KP_MINUS
-&kp HOME  &kp PAGE_DOWN           &kp END        &kp PAGE_UP              &trans                                           &kp UNDER        &kp N1  &kp N2  &kp N3  &kp ENTER
-&trans    &trans                  &trans         &trans                   &trans   &trans    &trans  &kp N0  &kp N0  &kp DOT  &kp QUESTION
-            >;
-
-            sensor-bindings = <&inc_dec_kp DOWN_ARROW UP_ARROW>;
-        };
-
         // ────────────────────────────────────────────────
         // Layer 5: WIRELESS - Bluetooth設定
         // ────────────────────────────────────────────────
+
         WIRELESS {
             bindings = <
-&bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4                          &bt BT_SEL 0    &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4
-&trans        &trans        &trans        &trans        &trans                                   &trans          &trans        &trans        &trans        &trans
-&trans        &trans        &trans        &trans        &trans                                   &trans          &trans        &trans        &trans        &bt BT_CLR
-&trans        &trans        &trans        &trans        &trans        &trans    &bootloader  &studio_unlock  &trans        &trans        &bt BT_CLR_ALL
+&bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4                         &bt BT_SEL 0    &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4
+&trans        &trans        &trans        &trans        &trans                               &trans          &trans        &trans        &trans        &trans
+&trans        &trans        &trans        &trans        &trans                               &trans          &trans        &trans        &trans        &bt BT_CLR
+&trans        &trans        &trans        &trans        &trans        &trans    &bootloader  &studio_unlock                &trans        &trans        &bt BT_CLR_ALL
             >;
 
             sensor-bindings = <&inc_dec_kp RIGHT_ARROW LEFT_ARROW>;
