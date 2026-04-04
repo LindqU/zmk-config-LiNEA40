@@ -171,10 +171,10 @@
 
         SYM {
             bindings = <
-&kp ESC  &kp LBRC  &kp RBRC  &kp LBKT  &kp RBKT                    &mkp MB4  &mkp MB5  &kp UP_ARROW  &trans    &trans
-&kp N1   &kp N2    &kp N3    &kp N4    &kp N5                      &mkp MB1  &mkp MB2  &mkp MB3      &kp LEFT  &kp RIGHT
-&kp N6   &kp N7    &kp N8    &kp N9    &kp N0                      &trans    &trans    &trans        &kp DOWN  &trans
-&to 0    &trans    &trans    &trans    &trans    &trans    &trans  &trans              &trans        &trans    &trans
+&kp NUMBER_7  &kp NUMBER_8  &kp NUMBER_9  &kp NUMBER_0      &kp SLASH                            &trans    &trans    &mkp MB3  &trans     &trans
+&kp NUMBER_4  &kp NUMBER_5  &kp NUMBER_6  &kp EQUAL         &kp MINUS                            &mkp MB4  &mkp MB1  &kp UP    &mkp MB2   &mkp MB5
+&kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp LEFT_BRACKET  &kp RIGHT_BRACKET                    &trans    &kp LEFT  &kp DOWN  &kp RIGHT  &trans
+&to 0         &trans        &trans        &trans            &trans             &trans    &trans  &trans              &trans    &trans     &trans
             >;
 
             sensor-bindings = <&re_kp C_VOLUME_DOWN C_VOLUME_UP>;
