@@ -77,53 +77,12 @@
         compatible = "zmk,combos";
 
         // 全角/半角 (左上 E+I)
-
-        ZenkakuHankaku {
-            bindings = <&kp GRAVE>;
-            key-positions = <11 12>;
-        };
-
         // Delete (右上 R+Y)
-
-        DeleteKey {
-            bindings = <&kp DEL>;
-            key-positions = <7 8>;
-        };
-
         // Insert (右上 W+R)
-
-        InsertKey {
-            bindings = <&kp INS>;
-            key-positions = <6 7>;
-        };
-
         // 中クリック
-
-        CenterClick {
-            bindings = <&mkp MB3>;
-            key-positions = <17 16>;
-        };
-
         // 右クリック
-
-        RightClick {
-            bindings = <&mkp MB2>;
-            key-positions = <18 17>;
-        };
-
         // 戻る (MB4)
-
-        PrevClick {
-            bindings = <&mkp MB4>;
-            key-positions = <27 28>;
-        };
-
         // 進む (MB5)
-
-        ClickNext {
-            bindings = <&mkp MB5>;
-            key-positions = <26 27>;
-        };
     };
 
     behaviors {
@@ -156,7 +115,7 @@
 &kp Q         &kp L         &kp U        &kp COMMA   &kp PERIOD                             &kp F          &kp W       &kp R        &kp Y          &kp P
 &mt LSHIFT E  &mt LALT I    &mt LCTRL A  &mt LGUI O  &kp DQT                                &kp K          &mt RGUI T  &mt RCTRL N  &mt RALT S     &mt RSHIFT H
 &kp Z         &kp X         &kp C        &kp V       &kp SEMICOLON                          &kp G          &kp D       &kp M        &kp J          &kp B
-&kp LALT      &kp LEFT_WIN  &lt 0 TAB    &lt 2 TAB   &lt 1 SPACE    &kp ENTER    &kp ENTER  &kp BACKSPACE              &mo 0        &kp BACKSLASH  &mt RSHIFT SLASH
+&kp LALT      &kp LEFT_WIN  &kp A        &lt 2 TAB   &lt 1 SPACE    &kp ENTER    &kp ENTER  &kp BACKSPACE              &mo 2        &kp BACKSLASH  &mt RSHIFT SLASH
             >;
 
             sensor-bindings = <&mouse_scrl SCRL_DOWN SCRL_UP>;
