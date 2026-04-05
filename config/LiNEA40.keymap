@@ -61,8 +61,9 @@
     };
 };
 
-// MOUSE レイヤー有効時にオートマウスとして使用
+// MOUSE レイヤー有効時にオートマウスとして使用（一時的に無効化）
 
+/*
 &trackball_listener {
     input-processors = <&zip_temp_layer MOUSE 2000>;
 
@@ -72,6 +73,7 @@
         process-next;
     };
 };
+*/
 
 / {
     combos {
