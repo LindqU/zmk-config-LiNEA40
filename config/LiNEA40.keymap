@@ -23,7 +23,22 @@
 #define WIRELESS 5
 
 // マウスカーソル設定
+
+&mmv {
+    delay-ms = <20>;
+    trigger-period-ms = <5>;
+    time-to-max-speed-ms = <100>;
+    acceleration-exponent = <2>;
+};
+
 // マウススクロール設定
+
+&msc {
+    delay-ms = <3>;
+    trigger-period-ms = <3>;
+    time-to-max-speed-ms = <100>;
+    acceleration-exponent = <0>;
+};
 
 / {
     input_processors {
@@ -70,6 +85,22 @@
         // 進む (MB5)
     };
 
+    behaviors {
+        re_kp: sensor_rotate_kp {
+            compatible = "zmk,behavior-sensor-rotate-var";
+            #sensor-binding-cells = <2>;
+            bindings = <&kp>, <&kp>;
+        };
+
+        mouse_scrl: mouse_wheel_scrl {
+            compatible = "zmk,behavior-sensor-rotate-var";
+            #sensor-binding-cells = <2>;
+            bindings = <&msc>, <&msc>;
+
+            tap-ms = <20>;
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
@@ -87,7 +118,7 @@
 &kp LALT      &kp LEFT_WIN  &kp A        &lt 2 TAB   &lt 1 SPACE    &kp ENTER    &kp ENTER  &kp BACKSPACE              &mo 2        &kp BACKSLASH  &mt RSHIFT SLASH
             >;
 
-            sensor-bindings = <&none>;
+            sensor-bindings = <&mouse_scrl SCRL_DOWN SCRL_UP>;
         };
 
         // ────────────────────────────────────────────────
@@ -105,7 +136,7 @@
 &to 0         &trans        &trans        &trans            &trans             &trans    &trans  &trans              &trans    &trans     &trans
             >;
 
-            sensor-bindings = <&none>;
+            sensor-bindings = <&re_kp C_VOLUME_DOWN C_VOLUME_UP>;
         };
 
         // ────────────────────────────────────────────────
