@@ -13,32 +13,14 @@
 // 1: NAV      - カーソル移動・テンキー
 // 2: SYM      - 記号・数字・マウス操作
 // 3: NUM      - ファンクションキー
-// 4: SCROLL   - トラックボールスクロールモード
+// 4: MOUSE    - オートマウスレイヤー
 // 5: WIRELESS - Bluetooth設定
 
 #define NAV      1
 #define SYM      2
 #define NUM      3
-#define SCROLL   4
+#define MOUSE    4
 #define WIRELESS 5
-
-// マウスカーソル設定
-
-&mmv {
-    delay-ms = <20>;
-    trigger-period-ms = <5>;
-    time-to-max-speed-ms = <100>;
-    acceleration-exponent = <2>;
-};
-
-// マウススクロール設定
-
-&msc {
-    delay-ms = <3>;
-    trigger-period-ms = <3>;
-    time-to-max-speed-ms = <100>;
-    acceleration-exponent = <0>;
-};
 
 / {
     input_processors {
@@ -61,15 +43,10 @@
     };
 };
 
-// SCROLL レイヤー有効時にトラックボールをスクロールとして使用
+// MOUSE レイヤー有効時にオートマウスとして使用
 
 &trackball_listener {
-    scroller {
-        layers = <SCROLL>;
-        input-processors =
-            <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
-            <&zip_xy_to_scroll_mapper>;
-    };
+    input-processors = <&zip_temp_layer MOUSE 2000>;
 };
 
 / {
@@ -83,22 +60,6 @@
         // 右クリック
         // 戻る (MB4)
         // 進む (MB5)
-    };
-
-    behaviors {
-        re_kp: sensor_rotate_kp {
-            compatible = "zmk,behavior-sensor-rotate-var";
-            #sensor-binding-cells = <2>;
-            bindings = <&kp>, <&kp>;
-        };
-
-        mouse_scrl: mouse_wheel_scrl {
-            compatible = "zmk,behavior-sensor-rotate-var";
-            #sensor-binding-cells = <2>;
-            bindings = <&msc>, <&msc>;
-
-            tap-ms = <20>;
-        };
     };
 
     keymap {
@@ -118,12 +79,13 @@
 &kp LALT      &kp LEFT_WIN  &kp A        &lt 2 TAB   &lt 1 SPACE    &kp ENTER    &kp ENTER  &kp BACKSPACE              &mo 2        &kp BACKSLASH  &mt RSHIFT SLASH
             >;
 
-            sensor-bindings = <&mouse_scrl SCRL_DOWN SCRL_UP>;
+            sensor-bindings = <&none>;
         };
 
         // ────────────────────────────────────────────────
         // Layer 1: NAV - カーソル移動・テンキー
         // ────────────────────────────────────────────────
+
         // ────────────────────────────────────────────────
         // Layer 2: SYM - 記号・数字・マウスボタン
         // ────────────────────────────────────────────────
@@ -136,15 +98,29 @@
 &to 0         &trans        &trans        &trans            &trans             &trans    &trans  &trans              &trans    &trans     &trans
             >;
 
-            sensor-bindings = <&re_kp C_VOLUME_DOWN C_VOLUME_UP>;
+            sensor-bindings = <&none>;
         };
 
         // ────────────────────────────────────────────────
         // Layer 3: NUM - ファンクションキー
         // ────────────────────────────────────────────────
+
         // ────────────────────────────────────────────────
-        // Layer 4: SCROLL - トラックボールスクロール
+        // Layer 4: MOUSE - オートマウスレイヤー
+        // トラックボール操作時に自動で有効になる
         // ────────────────────────────────────────────────
+
+        MOUSE {
+            bindings = <
+&trans    &trans    &mkp MB3  &trans     &trans                            &trans  &trans  &trans  &trans  &trans
+&mkp MB4  &mkp MB1  &kp UP    &mkp MB2   &mkp MB5                          &trans  &trans  &trans  &trans  &trans
+&trans    &kp LEFT  &kp DOWN  &kp RIGHT  &trans                            &trans  &trans  &trans  &trans  &trans
+&trans    &trans    &trans    &trans     &trans    &trans    &trans  &trans          &trans  &trans  &trans
+            >;
+
+            sensor-bindings = <&none>;
+        };
+
         // ────────────────────────────────────────────────
         // Layer 5: WIRELESS - Bluetooth設定
         // ────────────────────────────────────────────────
