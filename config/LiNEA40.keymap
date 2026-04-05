@@ -79,7 +79,6 @@
 &kp LALT      &kp LEFT_WIN  &kp A        &lt 2 TAB   &lt 1 SPACE    &kp ENTER    &kp ENTER  &kp BACKSPACE              &mo 2        &kp BACKSLASH  &mt RSHIFT SLASH
             >;
 
-            sensor-bindings = <&none>;
         };
 
         // ────────────────────────────────────────────────
@@ -98,7 +97,6 @@
 &to 0         &trans        &trans        &trans            &trans             &trans    &trans  &trans              &trans    &trans     &trans
             >;
 
-            sensor-bindings = <&none>;
         };
 
         // ────────────────────────────────────────────────
@@ -118,7 +116,6 @@
 &trans    &trans    &trans    &trans     &trans    &trans    &trans  &trans          &trans  &trans  &trans
             >;
 
-            sensor-bindings = <&none>;
         };
 
         // ────────────────────────────────────────────────
