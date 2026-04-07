@@ -41,14 +41,14 @@
 
         // ────────────────────────────────────────────────
         // Layer 0: DEFAULT
-        // 左手ホームロウ: E=Shift, I=Alt, A=Ctrl, 0=Win
+        // 左手ホームロウ: E=Shift, I=Alt, A=Ctrl, O=Win
         // 右手ホームロウ: T=Win, N=Ctrl, S=Alt, H=Shift
         // ────────────────────────────────────────────────
         default_layer {
             bindings = <
-                &kp Q       &kp L       &kp U       &kp COMMA   &kp PERIOD      &kp F       &kp W       &kp R       &kp Y       &kp P
-                &hm LSHIFT E &hm LALT I &hm LCTRL A &hm LGUI O  &kp DQT         &kp K       &hm RGUI T  &hm RCTRL N &hm RALT S  &hm RSHIFT H
-                &kp Z       &kp X       &kp C       &kp V       &kp SEMICOLON   &kp G       &kp D       &kp M       &kp J       &kp B
+                &kp Q        &kp L        &kp U        &kp COMMA    &kp PERIOD      &kp F        &kp W        &kp R        &kp Y        &kp P
+                &hm LSHIFT E &hm LALT I   &hm LCTRL A  &hm LGUI O   &kp DQT         &kp K        &hm RGUI T   &hm RCTRL N  &hm RALT S   &hm RSHIFT H
+                &kp Z        &kp X        &kp C        &kp V        &kp SEMICOLON   &kp G        &kp D        &kp M        &kp J        &kp B
                 &mo 5 &kp TAB &kp ESCAPE &none &lt 2 SPACE &kp ENTER &kp ENTER &kp BACKSPACE &kp RIGHT_WIN &kp RCTRL &kp RIGHT_ALT
             >;
             sensor-bindings = <&mouse_scrl SCRL_DOWN SCRL_UP>;
@@ -97,9 +97,9 @@
         // ────────────────────────────────────────────────
         mouse_layer {
             bindings = <
-                &trans   &trans   &mkp MB3  &trans   &trans   &trans &trans &trans &trans &trans
-                &mkp MB4 &mkp MB1 &kp UP    &mkp MB2 &mkp MB5 &trans &trans &trans &trans &trans
-                &trans   &kp LEFT &kp DOWN  &kp RIGHT &trans  &trans &trans &trans &trans &trans
+                &trans   &trans   &mkp MB3  &trans    &trans   &trans &trans &trans &trans &trans
+                &mkp MB4 &mkp MB1 &kp UP    &mkp MB2  &mkp MB5 &trans &trans &trans &trans &trans
+                &trans   &kp LEFT &kp DOWN  &kp RIGHT &trans   &trans &trans &trans &trans &trans
                 &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
             >;
             sensor-bindings = <&mouse_scrl SCRL_DOWN SCRL_UP>;
@@ -204,13 +204,32 @@
             tap-ms = <20>;
         };
 
-        // ホームロウMod-Tap（誤反応対策済み）
+        // ──────────────────────────────────────────
+        // ホームロウ Mod-Tap（誤反応対策済み）
+        //
+        // tapping-term-ms: ホールドと判定するまでの時間（ms）
+        //   この時間より長く押し続けると修飾キーとして認識される
+        //   短いと誤反応しやすく、長いと意図的なホールドが遅くなる
+        //
+        // require-prior-idle-ms: 直前のキー入力からこの時間（ms）以内に
+        //   押された場合はタップ優先にする
+        //   タイピング中の連続入力で修飾キーが誤反応するのを防ぐ
+        //   今回の誤反応対策のメイン設定
+        //
+        // flavor: ホールドかタップかの判定ロジック
+        //   "balanced"      = 次のキーを押してリリースしたタイミングで判定
+        //                     ショートカット操作と相性が良い（今回採用）
+        //   "tap-preferred" = tapping-term-ms以内は常にタップ扱い
+        //                     ショートカットが使いにくくなる
+        //   "hold-preferred"= 少しでも長押しするとホールド判定
+        //                     誤反応が最も多い
+        // ──────────────────────────────────────────
         hm: homerow_mod {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
-            tapping-term-ms = <280>;
-            require-prior-idle-ms = <150>;
-            flavor = "balanced";
+            tapping-term-ms = <200>;       // ホールド判定時間（デフォルト値）
+            require-prior-idle-ms = <150>; // タイピング中の誤反応防止
+            flavor = "balanced";           // ショートカットと相性の良い判定ロジック
             bindings = <&kp>, <&kp>;
         };
     };
