@@ -228,7 +228,7 @@
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             tapping-term-ms = <100>;       // ホールド判定時間（デフォルト値）
-            require-prior-idle-ms = <100>; // タイピング中の誤反応防止
+            require-prior-idle-ms = <200>; // タイピング中の誤反応防止
             flavor = "balanced";           // ショートカットと相性の良い判定ロジック
             bindings = <&kp>, <&kp>;
         };
