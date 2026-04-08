@@ -224,13 +224,13 @@
         //   "hold-preferred"= 少しでも長押しするとホールド判定
         //                     誤反応が最も多い
         // ──────────────────────────────────────────
-        //hm: homerow_mod {
-        //    compatible = "zmk,behavior-hold-tap";
-        //    #binding-cells = <2>;
-        //    tapping-term-ms = <100>;       // ホールド判定時間
-        //    require-prior-idle-ms = <200>; // タイピング中の誤反応防止
-        //    flavor = "balanced";           // ショートカットと相性の良い判定ロジック
-        //    bindings = <&kp>, <&kp>;
-        //};
+        hm: homerow_mod {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <100>;       // ホールド判定時間
+            require-prior-idle-ms = <200>; // タイピング中の誤反応防止
+            flavor = "balanced";           // ショートカットと相性の良い判定ロジック
+            bindings = <&kp>, <&kp>;
+        };
     };
 };
