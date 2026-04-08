@@ -227,7 +227,7 @@
         hm: homerow_mod {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
-            tapping-term-ms = <180>;            // ホールド判定時間
+            tapping-term-ms = <200>;            // ホールド判定時間
             require-prior-idle-ms = <150>;      // タイピング中の誤反応防止
             flavor = "tap-unless-interrupted";
             bindings = <&kp>, <&kp>;
