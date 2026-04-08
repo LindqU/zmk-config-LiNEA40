@@ -1,4 +1,0 @@
-- [ ] `config/west.yml` の `zmk` リビジョンを `main` に更新
-- [ ] `build.yaml` で左手（left）側にも ZMK Studio 設定を追加
-- [ ] プロジェクト内の `docs/enable_zmk_studio/` にドキュメントを保存
-- [ ] 変更内容の確認 (Walkthrough)
