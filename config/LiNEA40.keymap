@@ -44,7 +44,7 @@
 &kp Q          &kp L          &kp U         &kp COMMA    &kp PERIOD                                 &kp F          &kp W        &kp R         &kp Y          &kp P
 &hml LSHIFT E  &hml LALT I    &hml LCTRL A  &hml LGUI O  &kp DOUBLE_QUOTES                          &kp K          &hmr RGUI T  &hmr RCTRL N  &hmr RALT S    &hmr RSHIFT H
 &kp Z          &kp X          &kp C         &kp V        &kp SEMICOLON                              &kp G          &kp D        &kp M         &kp J          &kp B
-&kp ESC        &kp BACKSLASH  &kp GRAVE     &none        &lt 1 SPACE        &kp ENTER    &lt 5 TAB  &kp BACKSPACE               &kp GRAVE     &kp BACKSLASH  &kp ESC
+&kp ESC        &kp BACKSLASH  &kp GRAVE     &none        &lt 1 SPACE        &kp ENTER    &lt 5 TAB  &kp BACKSPACE               &kp GRAVE     &kp BACKSLASH  &mo 2
             >;
 
             sensor-bindings = <&mouse_scrl SCRL_DOWN SCRL_UP>;
@@ -63,10 +63,10 @@
 
         func_layer {
             bindings = <
-&kp F7  &kp F8  &kp F9  &kp F10  &trans                    &trans  &trans  &trans  &trans  &trans
-&kp F4  &kp F5  &kp F6  &trans   &trans                    &trans  &trans  &trans  &trans  &trans
-&kp F1  &kp F2  &kp F3  &trans   &trans                    &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans   &trans  &trans    &trans  &trans          &trans  &trans  &trans
+&kp F7  &kp F8  &kp F9  &kp F10  &trans                    &kp F17  &kp F18  &kp F19  &kp F20  &trans
+&kp F4  &kp F5  &kp F6  &trans   &trans                    &kp F14  &kp F15  &kp F16  &trans   &trans
+&kp F1  &kp F2  &kp F3  &trans   &trans                    &kp F11  &kp F12  &kp F13  &trans   &trans
+&trans  &trans  &trans  &trans   &trans  &trans    &trans  &trans            &trans   &trans   &trans
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOLUME_DOWN C_VOLUME_UP>;
