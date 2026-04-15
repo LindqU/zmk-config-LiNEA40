@@ -12,17 +12,17 @@
 // 1. レイヤー番号の定義 (マクロ)
 // ==========================================
 // 0: DEFAULT - 基本英字入力（ホームロウ Mod-Tap）
-// 1: NAV - カーソル移動・テンキー
-// 2: SYM - 記号・数字・マウス操作
-// 3: NUM - ファンクションキー
-// 4: MOUSE - オートマウスレイヤー
+// 1: SYM      - 記号・数字・マウス操作
+// 2: FUNC     - ファンクションキー
+// 3: NUM      - テンキー等
+// 4: MOUSE    - オートマウスレイヤー
 // 5: WIRELESS - Bluetooth設定
 
-#define DEFAULT 0
-#define NAV 1
-#define SYM 2
-#define NUM 3
-#define MOUSE 4
+#define DEFAULT  0
+#define SYM      1
+#define FUNC     2
+#define NUM      3
+#define MOUSE    4
 #define WIRELESS 5
 
 // ==========================================
@@ -153,7 +153,7 @@
 
 &mmv_input_listener {
     slow_on_nav {
-        layers = <NAV>;
+        layers = <SYM>;
         input-processors = <&zip_mmv_scaler_half 1 2>;
     };
 };
