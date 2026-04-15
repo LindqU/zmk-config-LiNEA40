@@ -139,7 +139,7 @@
 // 4. Input Processors & Listeners
 // ==========================================
 
-/{
+/ {
     input_processors {
         zip_mmv_scaler_half: zip_mmv_scaler_half {
             compatible = "zmk,input-processor-scaler";
