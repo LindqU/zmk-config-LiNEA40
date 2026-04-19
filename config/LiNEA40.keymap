@@ -136,29 +136,6 @@
 };
 
 // ==========================================
-// 4. Input Processors & Listeners
-// ==========================================
-
-/ {
-    input_processors {
-        zip_mmv_scaler_half: zip_mmv_scaler_half {
-            compatible = "zmk,input-processor-scaler";
-            #input-processor-cells = <2>;
-            type = <INPUT_EV_REL>;
-            codes = <INPUT_REL_X INPUT_REL_Y>;
-            track-remainders;
-        };
-    };
-};
-
-&mmv_input_listener {
-    slow_on_nav {
-        layers = <SYM>;
-        input-processors = <&zip_mmv_scaler_half 1 2>;
-    };
-};
-
-// ==========================================
 // 5. カスタム動作の定義 (Combos / Behaviors)
 // ==========================================
 
